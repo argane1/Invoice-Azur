@@ -1,367 +1,192 @@
-# 🧾 Enterprise Invoice & Receipt Review System
+# Enterprise Invoice & Receipt Review System
+
+> AI-powered invoice and receipt processing with automated validation and human-in-the-loop review.
 
 <p align="center">
-
-**AI-Powered Document Intelligence · Deterministic Validation · Human-in-the-Loop Review**
-
+  <img src="docs/images/dashboard-preview.png" alt="Invoice Review Dashboard" width="100%">
 </p>
 
 <p align="center">
+  <a href="#features">Features</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#documentation">Documentation</a>
+</p>
 
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge\&logo=fastapi\&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge\&logo=react\&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge\&logo=typescript\&logoColor=white)
-![Azure](https://img.shields.io/badge/Azure-AI-0078D4?style=for-the-badge\&logo=microsoftazure\&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Production-2496ED?style=for-the-badge\&logo=docker\&logoColor=white)
-
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/Azure_AI-0078D4?style=flat-square&logo=microsoftazure&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white">
 </p>
 
 ---
 
-## ✨ Product Overview
+## Overview
 
-**Enterprise Invoice & Receipt Review System** is a modern document-processing platform designed to automate invoice and receipt analysis while keeping accounting professionals in control of final decisions.
+The **Enterprise Invoice & Receipt Review System** is an end-to-end document intelligence platform designed to automate invoice and receipt processing while keeping accounting professionals in control of final decisions.
 
 The platform combines:
 
-> **Azure Document Intelligence**
-> ↓
-> **AI-powered extraction**
-> ↓
-> **Deterministic financial validation**
-> ↓
-> **Exception detection**
-> ↓
-> **Human review**
-> ↓
-> **Auditable decision**
+**Azure Document Intelligence** for document extraction  
+**Azure OpenAI** for intelligent document processing  
+**Deterministic validation rules** for financial checks  
+**Human review workflows** for final decisions  
+**Audit trails** for traceability and accountability
 
-It is built for organizations that need **automation without sacrificing financial control, explainability, or auditability**.
-
----
-
-# 🖥️ Platform Experience
-
-### Modern Accounting Review Workspace
+### Processing Flow
 
 ```text
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                        INVOICE REVIEW CENTER                                │
-├───────────────────┬──────────────────────────────┬───────────────────────────┤
-│                   │                              │                           │
-│  DOCUMENT QUEUE   │       DOCUMENT VIEWER       │     VALIDATION PANEL       │
-│                   │                              │                           │
-│  ● Invoice #1042  │      ┌────────────────┐      │  ✓ Invoice Number         │
-│  ● Invoice #1041  │      │                │      │  ✓ Supplier               │
-│  ⚠ Invoice #1040  │      │    INVOICE     │      │  ⚠ PO Missing             │
-│  ● Receipt #823   │      │    PREVIEW     │      │  ⚠ Tax Mismatch            │
-│                   │      │                │      │  ✓ Total                  │
-│                   │      └────────────────┘      │                           │
-│                   │                              │  Risk Score:  72 / 100    │
-│                   │                              │                           │
-│                   │                              │  [Approve] [Review]       │
-└───────────────────┴──────────────────────────────┴───────────────────────────┘
-```
-
-The interface is designed around the workflow accountants actually need:
-
-**Document → Extracted Data → Validation → Exception → Decision**
+Upload
+  ↓
+Classify
+  ↓
+Extract
+  ↓
+Validate
+  ↓
+Detect Exceptions
+  ↓
+Human Review
+  ↓
+Approve / Reject
+  ↓
+Audit Trail
+````
 
 ---
 
-# 🧠 Intelligent Processing Pipeline
+## Features
 
-```mermaid
-flowchart LR
+### Automated Document Extraction
 
-    A[📄 Invoice / Receipt] --> B[🔍 Document Classification]
-
-    B --> C[☁️ Azure Document Intelligence]
-
-    C --> D[📊 Structured Extraction]
-
-    D --> E[🤖 Azure OpenAI]
-
-    D --> F[⚙️ Deterministic Rules Engine]
-
-    E --> G[🧠 Intelligence Layer]
-
-    F --> G
-
-    G --> H{⚠️ Exceptions?}
-
-    H -->|No| I[✅ Ready for Approval]
-
-    H -->|Yes| J[👤 Human Review]
-
-    J --> K[✏️ Approve / Override / Reject]
-
-    I --> K
-
-    K --> L[📋 Audit Trail]
-
-    L --> M[🗄️ Persistent Storage]
-```
-
----
-
-# 🏗️ System Architecture
-
-```mermaid
-flowchart TB
-
-    subgraph FRONTEND["🖥️ FRONTEND"]
-        UI["React 19 + TypeScript"]
-        REVIEW["Review Workspace"]
-        DASH["Dashboard"]
-    end
-
-    subgraph API["⚡ APPLICATION LAYER"]
-        FAST["FastAPI"]
-        PIPE["Document Processing Pipeline"]
-        RULES["Accounting Rules Engine"]
-        AUDIT["Audit Service"]
-    end
-
-    subgraph AI["🤖 AI SERVICES"]
-        DI["Azure Document Intelligence"]
-        AOAI["Azure OpenAI"]
-    end
-
-    subgraph DATA["🗄️ DATA"]
-        SQLITE["SQLite"]
-        DOCS["Document Storage"]
-    end
-
-    UI --> FAST
-    REVIEW --> FAST
-    DASH --> FAST
-
-    FAST --> PIPE
-
-    PIPE --> DI
-    PIPE --> AOAI
-    PIPE --> RULES
-
-    RULES --> AUDIT
-    FAST --> SQLITE
-    PIPE --> DOCS
-
-    AUDIT --> SQLITE
-```
-
----
-
-# 🔍 Core Capabilities
-
-<table>
-<tr>
-<td width="33%">
-
-### 🤖 AI Extraction
-
-Multilingual invoice and receipt extraction powered by Azure Document Intelligence.
-
-**Handles:**
+Processes multilingual invoices and fuel receipts while handling:
 
 * Scanned documents
-* Complex tables
-* Multiple layouts
+* Variable layouts
 * Poor scan quality
-* Multilingual documents
+* Complex tables
+* Layout inconsistencies
 
-</td>
+### Deterministic Financial Validation
 
-<td width="33%">
-
-### ⚙️ Validation Engine
-
-Deterministic accounting rules independently validate extracted information.
-
-**Detects:**
+Automatically identifies accounting exceptions such as:
 
 * Duplicate line items
-* Missing POs
+* Missing purchase orders
 * Tax mismatches
 * Invalid totals
-* Missing fields
+* Missing required fields
 
-</td>
+### Human-in-the-Loop Review
 
-<td width="33%">
+Accounting professionals can:
 
-### 👤 Human Review
-
-Accounting professionals remain in control.
-
-**Capabilities:**
-
-* Side-by-side review
-* Overrides
-* Approval/rejection
-* Exception handling
-* Full audit history
-
-</td>
-</tr>
-</table>
+* Review the original document
+* Inspect extracted fields
+* Investigate validation failures
+* Override automated results
+* Approve or reject documents
+* Track every decision
 
 ---
 
-# 🔄 Document Lifecycle
+## Architecture
 
-```text
-                        ┌───────────────┐
-                        │   UPLOAD      │
-                        └───────┬───────┘
-                                │
-                                ▼
-                     ┌───────────────────┐
-                     │   CLASSIFY        │
-                     └─────────┬─────────┘
-                               │
-                               ▼
-                  ┌────────────────────────┐
-                  │   AI EXTRACTION        │
-                  │ Azure Document         │
-                  │ Intelligence           │
-                  └────────────┬───────────┘
-                               │
-                               ▼
-                     ┌─────────────────┐
-                     │ NORMALIZATION   │
-                     └────────┬────────┘
-                              │
-               ┌──────────────┴──────────────┐
-               ▼                             ▼
-       ┌────────────────┐           ┌─────────────────┐
-       │ Azure OpenAI   │           │ Rules Engine    │
-       │ Intelligence   │           │ Validation      │
-       └────────┬───────┘           └────────┬────────┘
-                │                            │
-                └──────────────┬─────────────┘
-                               ▼
-                      ┌──────────────────┐
-                      │ EXCEPTION ENGINE │
-                      └────────┬─────────┘
-                               │
-                     ┌─────────┴──────────┐
-                     │                    │
-                   PASS                 FLAG
-                     │                    │
-                     ▼                    ▼
-              ┌────────────┐      ┌──────────────┐
-              │ APPROVAL   │      │ HUMAN REVIEW │
-              └─────┬──────┘      └──────┬───────┘
-                    │                    │
-                    └─────────┬──────────┘
-                              ▼
-                       ┌──────────────┐
-                       │ AUDIT TRAIL  │
-                       └──────────────┘
-```
-
----
-
-# 📊 Validation Intelligence
+<p align="center">
+  <img src="docs/images/architecture.png" alt="System Architecture" width="90%">
+</p>
 
 The system separates **AI interpretation** from **financial validation**.
 
 ```text
-                 AI
-        ┌──────────────────┐
-        │ Understand       │
-        │ Extract          │
-        │ Normalize        │
-        └────────┬─────────┘
-                 │
-                 ▼
-        ┌──────────────────┐
-        │ Deterministic    │
-        │ Rules            │
-        ├──────────────────┤
-        │ ✓ PO exists      │
-        │ ✓ Tax valid      │
-        │ ✓ Totals match   │
-        │ ✓ No duplicates  │
-        │ ✓ Required data  │
-        └────────┬─────────┘
-                 │
-                 ▼
-        ┌──────────────────┐
-        │ Human Decision   │
-        │                  │
-        │ Approve          │
-        │ Override         │
-        │ Reject           │
-        └──────────────────┘
+                    DOCUMENT
+                       │
+                       ▼
+          Azure Document Intelligence
+                       │
+                       ▼
+              Structured Data
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+        Azure OpenAI       Rules Engine
+              │                 │
+              └────────┬────────┘
+                       ▼
+                Exception Detection
+                       │
+                       ▼
+                 Human Review
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+            Approve           Reject
+              │                 │
+              └────────┬────────┘
+                       ▼
+                  Audit Trail
 ```
-
-This architecture prevents AI-generated interpretations from becoming uncontrolled financial decisions.
 
 ---
 
-# 📁 Repository Architecture
+## Technology Stack
+
+| Layer                 | Technology                           |
+| --------------------- | ------------------------------------ |
+| Backend               | FastAPI · Python 3.12+               |
+| Frontend              | React 19 · TypeScript · Tailwind CSS |
+| AI                    | Azure OpenAI                         |
+| Document Intelligence | Azure Document Intelligence          |
+| Database              | SQLite                               |
+| Build                 | Vite · pnpm · uv                     |
+| Deployment            | Docker                               |
+
+---
+
+## Repository Structure
 
 ```text
-enterprise-invoice-review/
+.
+├── backend/
+│   ├── app/
+│   ├── scripts/
+│   └── pyproject.toml
 │
-├── 📂 backend/
-│   ├── 📂 app/
-│   │   ├── API
-│   │   ├── Services
-│   │   ├── Pipeline
-│   │   ├── Rules
-│   │   └── Models
-│   │
-│   ├── 📂 scripts/
-│   └── 📄 pyproject.toml
+├── frontend/
+│   ├── src/
+│   └── vite.config.ts
 │
-├── 📂 frontend/
-│   ├── 📂 src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── types/
-│   │
-│   └── 📄 vite.config.ts
-│
-├── 📂 samples/
-│   └── invoice & receipt test documents
-│
-├── 📂 docs/
-│   ├── architecture.md
-│   ├── azure-deploy.md
-│   ├── pricing.md
-│   ├── api-and-pipeline.md
-│   └── client-brief.md
-│
-├── 🐳 Dockerfile
-├── 🔐 .env.example
-└── 📘 README.md
+├── samples/
+├── docs/
+├── Dockerfile
+├── .env.example
+└── README.md
 ```
 
 ---
 
-# 🚀 Quick Start
+# Getting Started
 
-## 1. Clone the Repository
+## Prerequisites
+
+* Python 3.12+
+* Node.js 22+
+* pnpm 11.3+
+* uv
+* Docker (optional)
+
+## Environment Variables
+
+Create your environment file:
 
 ```bash
-git clone <repository-url>
-cd enterprise-invoice-review
+cp .env.example .env
 ```
 
-## 2. Configure Azure Services
-
-Create:
-
-```text
-.env
-```
-
-with:
+Configure Azure services:
 
 ```env
 AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
@@ -374,22 +199,24 @@ AZURE_OPENAI_API_KEY=your-key
 ALLOWED_ORIGIN=http://localhost:5173
 ```
 
+> Never commit `.env` files or Azure credentials to Git.
+
 ---
 
-# ⚡ Start Backend
+## Backend
 
 ```bash
 cd backend
 uv sync --locked --no-dev
 ```
 
-Initialize the application:
+Initialize the database:
 
 ```bash
 uv run --locked --no-sync python -c "from app.main import create_app; app = create_app(); print('Database initialized')"
 ```
 
-Start FastAPI:
+Start the API:
 
 ```bash
 uv run --locked --no-sync uvicorn app.main:create_app \
@@ -398,23 +225,13 @@ uv run --locked --no-sync uvicorn app.main:create_app \
   --port 8000
 ```
 
----
-
-# ⚛️ Start Frontend
-
-```bash
-cd frontend
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-Open:
+API:
 
 ```text
-http://localhost:5173
+http://localhost:8000
 ```
 
-API documentation:
+Swagger:
 
 ```text
 http://localhost:8000/docs
@@ -422,13 +239,31 @@ http://localhost:8000/docs
 
 ---
 
-# 🐳 Production Container
+## Frontend
+
+```bash
+cd frontend
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Application:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Docker
+
+Build:
 
 ```bash
 docker build -t invoice-review:latest .
 ```
 
-Then:
+Run:
 
 ```bash
 docker run \
@@ -444,55 +279,11 @@ docker run \
 
 ---
 
-# 🛡️ Security Architecture
-
-```text
-                    🔐 SECRETS
-                        │
-                        ▼
-                 Environment /
-                 Secret Manager
-                        │
-          ┌─────────────┴─────────────┐
-          ▼                           ▼
-   Azure Credentials            Application Secrets
-          │                           │
-          └─────────────┬─────────────┘
-                        ▼
-                 Backend Services
-                        │
-            ┌───────────┴───────────┐
-            ▼                       ▼
-      Secure Documents        Audit Records
-```
-
-### Production Security Principles
-
-🔒 Never commit credentials
-🔒 Restrict CORS origins
-🔒 Protect uploaded financial documents
-🔒 Use managed secrets in production
-🔒 Persist databases outside ephemeral containers
-🔒 Apply access controls to document storage
-🔒 Maintain audit history for decisions
-
----
-
-# 📚 Documentation
-
-| Resource                      | Purpose                     |
-| ----------------------------- | --------------------------- |
-| 🏛️ `docs/architecture.md`    | System architecture         |
-| ☁️ `docs/azure-deploy.md`     | Azure deployment            |
-| 💰 `docs/pricing.md`          | Infrastructure and pricing  |
-| 🔌 `docs/api-and-pipeline.md` | API and processing pipeline |
-| 📋 `docs/client-brief.md`     | Product requirements        |
-
----
-
-# 🧪 Development Quality
+# Development
 
 ### Backend
+
+Lint:
 
 ```bash
 uv run --locked --no-sync ruff check app scripts
@@ -502,74 +293,93 @@ uv run --locked --no-sync ruff check app scripts
 
 ```bash
 pnpm lint
-```
-
-```bash
 pnpm build
-```
-
-```bash
 pnpm exec tsc -b
 ```
 
 ### Development Principles
 
-```text
-Type Safety
-     +
-Deterministic Validation
-     +
-Testable Business Rules
-     +
-Secure Configuration
-     +
-Auditable Decisions
-     =
-Production-Ready Architecture
-```
+* Keep business rules deterministic and testable.
+* Use `uv.lock` for dependency management.
+* Do not commit secrets or uploaded documents.
+* Keep production configuration environment-based.
+* Preserve auditability for financial decisions.
 
 ---
 
-# 🎯 Design Philosophy
+# Security
 
-The platform is built around one core principle:
+Because the platform processes financial documents, production deployments should apply appropriate security controls.
+
+* Never commit API keys or credentials.
+* Restrict CORS origins.
+* Protect uploaded documents.
+* Use managed secrets in production.
+* Persist production data outside ephemeral containers.
+* Apply access controls to document storage.
+* Maintain audit logs for important decisions.
+
+For enterprise deployments, consider integrating with an identity provider such as Microsoft Entra ID.
+
+---
+
+# Documentation
+
+| Document                                          | Description                 |
+| ------------------------------------------------- | --------------------------- |
+| [`architecture.md`](docs/architecture.md)         | System architecture         |
+| [`azure-deploy.md`](docs/azure-deploy.md)         | Azure deployment            |
+| [`pricing.md`](docs/pricing.md)                   | Infrastructure and pricing  |
+| [`api-and-pipeline.md`](docs/api-and-pipeline.md) | API and processing pipeline |
+| [`client-brief.md`](docs/client-brief.md)         | Product requirements        |
+
+---
+
+## Project Philosophy
 
 > **Automate the work, not the accountability.**
 
-AI handles document understanding and extraction.
+AI extracts and interprets documents.
 
-Deterministic rules handle financial validation.
+Deterministic rules validate financial data.
 
-Humans make final decisions.
+Humans make the final decision.
 
-The audit layer records what happened.
-
-This creates an architecture that is **AI-assisted, financially controlled, explainable, and enterprise-oriented**.
-
----
-
-# 🏁 Project Status
-
-**Enterprise Invoice & Receipt Review System**
-
-**Architecture:** ✅ Modular
-**Document Intelligence:** ✅ Azure-powered
-**AI Processing:** ✅ Azure OpenAI
-**Validation Engine:** ✅ Deterministic
-**Human Review:** ✅ Supported
-**Auditability:** ✅ Built into workflow
-**Containerization:** ✅ Docker
-**API:** ✅ FastAPI / OpenAPI
-**Frontend:** ✅ React + TypeScript
+The audit trail records what happened.
 
 ---
 
 <p align="center">
-
-### Built for intelligent financial document operations.
-
-**AI × Automation × Human Control × Auditability**
-
+  <strong>AI-powered document processing for modern financial operations.</strong>
 </p>
-#   I n v o i c e - A z u r  
- 
+```
+
+### One important change
+
+The biggest improvement is to use **real screenshots instead of ASCII UI mockups**.
+
+For GitHub, I would structure the top of the README like this:
+
+```text
+┌──────────────────────────────────────────────┐
+│                                              │
+│     ENTERPRISE INVOICE REVIEW SYSTEM         │
+│                                              │
+│     AI-powered financial document review     │
+│                                              │
+│              [ Dashboard Screenshot ]        │
+│                                              │
+└──────────────────────────────────────────────┘
+
+Features
+
+[ Automated Extraction ] [ Validation ] [ Human Review ]
+
+                 Architecture
+
+             [ Clean Diagram ]
+
+              Getting Started
+```
+
+
